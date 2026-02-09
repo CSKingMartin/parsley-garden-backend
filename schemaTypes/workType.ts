@@ -17,8 +17,15 @@ export const workType = defineType({
       options: {source: 'title'},
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: 'color',
+      type: 'string',
+      options: {
+        list: [{title: 'Terracotta', value: 'terracotta'}],
+      },
+    }),
     defineField({name: 'cardTop', type: 'string', title: 'Card Top'}),
-    defineField({name: 'abbreviation', type: 'string', title: 'Abbreviation'}),
+    defineField({name: 'cardBottom', type: 'string', title: 'Card Bottom'}),
     defineField({name: 'url', type: 'url', title: 'Project URL'}),
     defineField({
       name: 'company',
@@ -31,9 +38,18 @@ export const workType = defineType({
       of: [{type: 'block'}],
     }),
     defineField({
+      title: 'Images',
       name: 'images',
       type: 'array',
-      of: [{type: 'image'}],
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({name: 'image', type: 'image'}),
+            defineField({name: 'landscape', type: 'boolean'}),
+          ],
+        },
+      ],
     }),
   ],
 })
